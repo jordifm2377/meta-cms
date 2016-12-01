@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* OMATECH Xtreme Web Culture */
+/************ EDITORA 4.2 ************/
+/*************************************/
+/* estructura */
+@import url("layout.css");
+/* estils comuns */
+@import url("styles.css");
+/* colors i backgrounds */
+@import url("skin.css");

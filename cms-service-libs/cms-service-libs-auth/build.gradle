@@ -1,0 +1,124 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'distribution'
+apply plugin: 'java-library-distribution'
+apply plugin: 'os-package'
+apply plugin: 'net.researchgate.release'
+apply plugin: 'sonar-runner'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 1, 'hours'
+    resolutionStrategy.cacheChangingModulesFor 1, 'hours'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.2.0'
+        classpath 'net.researchgate:gradle-release:2.1.1'
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+test {
+  testLogging.showStandardStreams = true
+}
+
+eclipse {
+    classpath {
+        downloadSources = true
+    }
+}
+idea {
+    module {
+        jdkName = '1.8'
+        downloadSources = true
+    }
+}
+dependencies {
+  	compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.3'
+	compile (group: 'com.google.guava', name: 'guava', version: '15.0'){
+		force = true
+	}
+	compile (group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.4.1'){
+  		force = true
+	}
+	compile (group: 'commons-io', name: 'commons-io', version: '2.4')
+	compile (group: 'org.brickred', name: 'socialauth', version: '4.7')  {
+		exclude group: 'javax.servlet'
+	}
+
+  compile group: 'org.opensaml', name: 'opensaml', version: '2.6.+'
+    compile group: 'com.auth0',          name: 'java-jwt',      version: '2.0.1'
+    compile group: 'org.eclipse.persistence', name:'javax.persistence',  version: '2.0.5'
+  testCompile group:  'junit', name: 'junit-dep', version: '4.11'
+  testCompile group:  'com.restfuse', name: 'com.eclipsesource.restfuse', version: '1.2.0'
+  testCompile ('org.mockito:mockito-all:1.10.19')
+}
+
+
+test {
+    systemProperties 'logback.configurationFile' : new File(projectDir,'src/main/resources/logback.xml').absolutePath
+}
+
+repositories {
+    jcenter()
+    maven {
+        url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/thirdparty/"
+    }
+    maven {
+        url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/releases/"
+    }
+  }
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+//extraArchive {
+//  sources = true
+//  javadoc = true
+//}
+
+sonarRunner {
+  sonarProperties {
+    property "sonar.host.url", "http://sonar.oneplatform.build"
+    property "sonar.jdbc.url", "jdbc:mysql://sonar.c35w2xq4gxyh.us-west-2.rds.amazonaws.com:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+    property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+    property "sonar.jdbc.username", "$System.env.sonarUsername"
+    property "sonar.jdbc.password", "$System.env.sonarPassword"
+  }
+}

@@ -1,0 +1,56 @@
+<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="s21bba95640971aa9d859e25f80632699b8ae865c7" Version="2.0" IssueInstant="2015-05-14T07:12:03Z" Destination="http://local.1p.thomsonreuters.com:8080/api/oauth"><saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">https://iameam-cloud-dev.thomsonreuters.com:443/auth</saml:Issuer><samlp:Status xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
+<samlp:StatusCode  xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+Value="urn:oasis:names:tc:SAML:2.0:status:Success">
+</samlp:StatusCode>
+</samlp:Status><saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="s2dbde5805f5c4090dc5dfc42471055911f6f4de44" IssueInstant="2015-05-14T07:12:03Z" Version="2.0">
+<saml:Issuer>https://iameam-cloud-dev.thomsonreuters.com:443/auth</saml:Issuer><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<ds:Reference URI="#s2dbde5805f5c4090dc5dfc42471055911f6f4de44">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<ds:DigestValue>BHc+d3Ehs/u6HZ2HZJgHYWkAh6k=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+mtGYFoO/fayiluVMb/uCqJZIONhxnPmYzQY/V62N3GkLBC3TbQlrxFeX5yVHBbDt8nl5oJDgAKkI
+pmu9WZ+U+V1EMiYMM8lbPCy8UmmZkI/gVfiypvAdQvbEv9HufsWAnaIN4bpRTKLjZAKnikrukoFF
+IWSBXCnbiV0Ne/KElMQDir5VXWo9mcY6dbuyzV3wjGRE2EjH+WUKh+cNDW3pAZdUHIyfX3zIBcbC
+7IAsZ9ySegpFK0qgrvDlZhIP/P0OIatwFNEiPNvNyZgJ+Rsd6oRjJjM8F6Zo29rfHG3xesBIi2wb
+Ji4m8GiLG9JeK2U8C7joHGuN+NF47Vqm5/P5Mw==
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIDeTCCAmECBFSutW8wDQYJKoZIhvcNAQEEBQAwgYAxCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJO
+WTERMA8GA1UEBwwITmV3IFlvcmsxGDAWBgNVBAoMD1Rob21zb24gUmV1dGVyczEfMB0GA1UECwwW
+VGVjaG5vbG9neSBEZXZlbG9wbWVudDEWMBQGA1UEAwwNdHJzaWduaW5nY2VydDAeFw0xNTAxMDgx
+NjUwNTRaFw0yNTAxMDUxNjUwNTVaMIGAMQswCQYDVQQGEwJVUzELMAkGA1UECAwCTlkxETAPBgNV
+BAcMCE5ldyBZb3JrMRgwFgYDVQQKDA9UaG9tc29uIFJldXRlcnMxHzAdBgNVBAsMFlRlY2hub2xv
+Z3kgRGV2ZWxvcG1lbnQxFjAUBgNVBAMMDXRyc2lnbmluZ2NlcnQwggEiMA0GCSqGSIb3DQEBAQUA
+A4IBDwAwggEKAoIBAQDnopXP4VfALxwve4gNi8J3QdgOSoT0NVQr8F06HVMiFEGiOBxO7GNIs64o
+4NjjWkefVa2czAcNZXPYm7mTxSA/77c+CnTj1gC4R1Sp2A5CEwUb5x3L3c9MJ+kEFR6a3cpxA7xN
+S3GGWjzSnBWnSrQtqHh7DYC0lgWqwTiG16Fx331UtPfjrkKknD1teL64YS81EYzkRBXgmutUQ1iM
+ekaGwsGVzhDtoR/WigxklqGe1z+R8tsKBcyZ+ldtDAfJ+NIEvqNmiVrawsKfm5XbyASjEk7gDJAW
+9w+J8wkpATQIhA2k41TN1u+eli0+0h3eLIKxOr8a7KQtvR6/yip5j7GxAgMBAAEwDQYJKoZIhvcN
+AQEEBQADggEBADXigIIP8LjLkrsYdYRajFHIHcddJPbXWmzLpRiPFu/moBiOtdbqfjN0kuV3Nmyy
+nY+xziET1tm20FLn4Uej2LWz0PQ6hfdieFefWTi230SFXRPx4CDSkw1dWJZRHW8bOCz1MzMHjF4i
+r8IOLhHMckWhVsNXXQ+27cRHNe3tOPm+fuWhod8eL+otk5PrXZcMmifuHj53sthneWdOdUa7gfon
+37u0CDOvCXo1+dBMJ/ojNKqAf4b1kUM97ulSL2ouYqmvdkxRzgixLs521oqGdpMrx/IB7VHHIIld
+Y84C+65adyDeImiu0IZmPcoPG1xdlStTOTthd5y1WP/YIblDMtw=
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature><saml:Subject>
+<saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" NameQualifier="https://iameam-cloud-dev.thomsonreuters.com:443/auth" SPNameQualifier="http://local.1p.thomsonreuters.com:8080/api/oauth">santokhsingheng@gmail.com</saml:NameID><saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+<saml:SubjectConfirmationData NotOnOrAfter="2015-05-14T07:22:03Z" Recipient="http://local.1p.thomsonreuters.com:8080/api/oauth"/></saml:SubjectConfirmation>
+</saml:Subject><saml:Conditions NotBefore="2015-05-14T07:02:03Z" NotOnOrAfter="2015-05-14T07:22:03Z">
+<saml:AudienceRestriction>
+<saml:Audience>http://local.1p.thomsonreuters.com:8080/api/oauth</saml:Audience>
+</saml:AudienceRestriction>
+</saml:Conditions>
+<saml:AuthnStatement AuthnInstant="2015-05-14T07:07:45Z" SessionIndex="s2e83ed5fa4e49a37bbe88aa5f2a28b77beb830401"><saml:AuthnContext><saml:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport</saml:AuthnContextClassRef></saml:AuthnContext></saml:AuthnStatement><saml:AttributeStatement><saml:Attribute Name="FirstName"><saml:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">santokh</saml:AttributeValue></saml:Attribute><saml:Attribute Name="emailAddress"><saml:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">santokhsingheng@gmail.com</saml:AttributeValue></saml:Attribute><saml:Attribute Name="LastName"><saml:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">singh</saml:AttributeValue></saml:Attribute><saml:Attribute Name="truid"><saml:AttributeValue xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">25a63779-c048-4494-a9f0-5bfb263ba83c</saml:AttributeValue></saml:Attribute></saml:AttributeStatement></saml:Assertion></samlp:Response>

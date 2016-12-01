@@ -1,0 +1,6 @@
+-- Starting /var/www/eldiae/admin/generate_cache.php 03/06/2011 15:10:02
+generant cache per: quienes-somos amb l'idioma: ALL
+generating /var/www/eldiae/cache/quienes-somos.html 
+generating /var/www/eldiae/cache/es/quienes-somos.html 
+final generacio cache
+generant cache per: vota-tu-palabra amb l'idioma: ALL

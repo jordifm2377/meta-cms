@@ -1,0 +1,7 @@
+rootProject.name='cms-service-libs'
+include 'cms-service-libs-auth'
+include 'cms-service-libs-cache'
+include 'cms-service-libs-db'
+include 'cms-service-libs-exception'
+include 'cms-service-libs-feature'
+include 'cms-service-libs-utils'

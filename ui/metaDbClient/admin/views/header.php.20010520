@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/jquery-1.2.3.pack.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/calendari_javascript.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/datapicker.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/ajax.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/upload.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/interface.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/utils.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/jquery.dimensions.min.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/jquery.positionBy.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/jquery.jdMenu.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/jquery.flash.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/jquery.jqUploader.js"> </script>
+<script language="javascript" type="text/javascript" src="<?php echo APP_BASE?>/jss/jqEditor.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/general_functions.js"> </script>
+
+<?php if(GOOGLE_MAPS_API_KEY!="" && $googlemaps){?>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo GOOGLE_MAPS_API_KEY?>" type="text/javascript"> </script>
+<?php } ?>
+
+<!--Smarkup-->
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/smarkup/smarkup.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/smarkup/conf/html/conf.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/smarkup/conf/css/conf.js"> </script>
+<link rel="stylesheet" type="text/css" href="<?php echo APP_BASE?>/jss/smarkup/skins/style.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo APP_BASE?>/jss/smarkup/skins/html/style.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo APP_BASE?>/jss/smarkup/skins/css/style.css"/>
+<!--Smarkup end-->
+
+<link href="<?php echo APP_BASE?>/images/favicon.ico" rel="shortcut icon"/>
+<link rel="stylesheet" href="<?php echo APP_BASE?>/csss/jquery.jdMenu.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo APP_BASE?>/csss/jqflashupload.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo APP_BASE?>/csss/jqeditor.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+	function changestatusimg(rel){
+		var st=$(rel).val();
+		if(st=="O") {
+			$("#statusimg").attr("class",'status publish');
+		}
+		else if(st=="P") {
+			$("#statusimg").attr("class",'status pending');
+		}
+		else {
+			$("#statusimg").attr("class",'status revised');
+		}
+	}
+
+	function browseImage(id){
+		$("#fosc_upload").show();
+		$("#browse-popup1").html("<p style='text-align:right;margin-top:0'><a style='color:#333333;' href='javascript://' onclick='$(\"#browse-popup1\").hide();$(\"#fosc_upload\").hide();'><img  border='0' src='images/eliminarmini.gif'/> Cerrar<\/a><\/p><div id='image_content'><\/div>");
+		$("#image_content").load("<?php echo "/".URL_UPLOADS; ?>file_browser.php?reload_arr_images=true&arr_images_id="+id);
+		$("#browse-popup1").show();
+		$("#fosc_upload").css("height",$(document).height());
+		var offset=$("#"+id).offset({ scroll: false });
+		$("#browse-popup1").css("top",offset.top-200);
+		$("#browse-popup1").css("left",offset.left);
+	}
+</script>
+
+<link rel="stylesheet" href="<?php echo APP_BASE?>/csss/editora.css" type="text/css" />
+    <!-- compliance patch for microsoft browsers -->
+    <!--[if lt IE 7]><script src="/jss/ie7/ie7-standard-p.js" type="text/javascript"></script><![endif]-->
+    <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="/csss/ie6.css" media="screen"/><![endif]-->
+    <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/csss/ie.css" media="screen"/><![endif]-->
+
+<link rel="stylesheet" href="<?php echo APP_BASE?>/csss/nicetitle.css" type="text/css" />
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/ajuda.js"> </script>
+<script type="text/javascript" src="<?php echo APP_BASE?>/jss/maps.js"> </script>
+<title>Editora 4.2 - <?php echo $title ?></title>
+</head>

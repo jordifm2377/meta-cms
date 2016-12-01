@@ -1,0 +1,251 @@
+apply plugin: 'distribution'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'jacoco'
+apply plugin: 'java'
+apply plugin: 'java-library-distribution'
+//apply plugin: 'net.researchgate.release'
+apply plugin: 'os-package'
+apply plugin: 'sonar-runner'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.2'
+}
+
+configurations.all {
+	resolutionStrategy.cacheDynamicVersionsFor 1, 'hours'
+	resolutionStrategy.cacheChangingModulesFor 1, 'hours' 
+}
+
+buildscript {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		jcenter()
+		maven {
+			url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/thirdparty/"
+		}
+		maven {
+			url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/releases/"
+		}
+	}
+	dependencies {
+		// https://mvnrepository.com/artifact/com.netflix.nebula/gradle-ospackage-plugin
+//		classpath 'com.netflix.nebula:gradle-ospackage-plugin:3.6.1'
+		classpath 'com.netflix.nebula:gradle-ospackage-plugin:2.2.0'
+		
+		// https://mvnrepository.com/artifact/net.researchgate/gradle-release
+//		classpath 'net.researchgate:gradle-release:2.4.0'
+		classpath 'net.researchgate:gradle-release:2.1.1'
+	}
+}
+
+defaultTasks 'clean', 'build', 'buildRpm'
+
+def permanentPackageName = rootProject.name
+def group = 'thomsonreuters-cms'
+def rpmRelease = 1
+def snapshot = true
+
+if (snapshot) {
+	rpmRelease = 'SNAPSHOT'
+}
+
+version = '1.0'
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'CMS Disease Service',
+			'Implementation-Version': version,
+			'Main-Class': 'com.thomsonreuters.server.ServerRunner'
+	}
+	exclude('**/test/*')
+	exclude('*.properties')
+	exclude('certs/test')
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	jcenter()
+	maven {
+		url "http://artifactory.thomsonreuterslifesciences.com/artifactory/simple/thomson-3rd-party-libs/"
+	}
+	maven {
+		url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/thirdparty/"
+	}
+	maven {
+		url "http://repo.1p.thomsonreuters.com/nexus/content/repositories/releases/"
+	}
+}
+
+eclipse {
+	classpath {
+		downloadSources = true
+	}
+}
+
+idea {
+	module {
+		jdkName = '1.8'
+		downloadSources = true
+	}
+}
+
+dependencies {
+	// cms-service-libs
+	compile 'com.thomsonreuters.cms:cms-service-libs-db:+'
+	compile 'com.thomsonreuters.cms:cms-service-libs-exception:+'
+	compile 'com.thomsonreuters.cms:cms-service-libs-feature:+'
+	compile 'com.thomsonreuters.cms:cms-service-libs-synchronization:+'
+	compile 'com.thomsonreuters.cms:cms-service-libs-utils:+'
+	
+	// http://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+	
+	// https://mvnrepository.com/artifact/ch.qos.logback/logback-core
+	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.1.7'
+	
+	// https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
+//	compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.19'
+	
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.8.0'
+	
+	// http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.0'
+	
+	// http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.0'
+	
+	// https://mvnrepository.com/artifact/com.google.inject/guice
+	compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
+	
+	// https://mvnrepository.com/artifact/com.netflix.governator/governator-annotations
+	compile group: 'com.netflix.governator', name: 'governator-annotations', version: '1.13.5'
+	
+	// https://mvnrepository.com/artifact/com.netflix.karyon/karyon-archaius
+	compile group: 'com.netflix.karyon', name: 'karyon-archaius', version: '2.1.00-RC6'
+	
+	// https://mvnrepository.com/artifact/com.netflix.karyon/karyon-core
+	compile group: 'com.netflix.karyon', name: 'karyon-core', version: '2.1.00-RC6'
+	
+	// https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
+	compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0.1'
+	
+	// https://mvnrepository.com/artifact/org.fusesource.jansi/jansi
+	compile group: 'org.fusesource.jansi', name: 'jansi', version: '1.13'
+	
+	// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+	
+	// http://repo.oneplatform.build/nexus/content/repositories/releases/com/thomsonreuters/1p-client-api/
+//	compile group: 'com.thomsonreuters', name: '1p-client-api', version: '0.48.5'
+	
+	// http://repo.oneplatform.build/nexus/content/repositories/releases/com/thomsonreuters/1p-service-api/
+//	compile group: 'com.thomsonreuters', name: '1p-service-api', version: '0.48.5'
+	
+	// http://repo.oneplatform.build/nexus/content/repositories/releases/com/thomsonreuters/1p-service-lib/
+	compile group: 'com.thomsonreuters', name: '1p-service-lib', version: '0.48.5'
+	
+	// http://repo.oneplatform.build/nexus/content/repositories/releases/com/thomsonreuters/1p-service-swagger/
+	compile group: 'com.thomsonreuters', name: '1p-service-swagger', version: '0.48.5'
+	
+	// http://repo.oneplatform.build/nexus/content/repositories/releases/com/thomsonreuters/eiddo-client-karyon/
+//	compile group: 'com.thomsonreuters', name: 'eiddo-client-karyon', version: '0.6.11'
+	
+	// https://mvnrepository.com/artifact/com.sun.jersey.jersey-test-framework/jersey-test-framework-core
+	testCompile group: 'com.sun.jersey.jersey-test-framework', name: 'jersey-test-framework-core', version: '1.19.1'
+	
+	// https://mvnrepository.com/artifact/com.sun.jersey.jersey-test-framework/jersey-test-framework-external
+	testCompile group: 'com.sun.jersey.jersey-test-framework', name: 'jersey-test-framework-external', version: '1.19.1'
+	
+	// https://mvnrepository.com/artifact/junit/junit
+	testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+//sonarRunner {
+//	sonarProperties {
+//		property "sonar.host.url", "http://sonar.oneplatform.build"
+//		property "sonar.jdbc.url", "jdbc:mysql://sonar.c35w2xq4gxyh.us-west-2.rds.amazonaws.com:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true"
+//		property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+//		property "sonar.jdbc.username", "$System.env.sonarUsername"
+//		property "sonar.jdbc.password", "$System.env.sonarPassword"
+//	}
+//}
+
+// Sonar recommends 7.4
+jacoco {
+	toolVersion = "0.7.4.+"
+	reportsDir = file("$buildDir/reports/coverage")
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		csv.enabled false
+		html.destination "${buildDir}/reports/coverage/html"
+	}
+}
+
+uploadArchives {
+	repositories {
+		flatDir {
+			dirs 'repos'
+		}
+	}
+}
+
+gradle.taskGraph.whenReady {
+	ospackage {
+		packageName = permanentPackageName
+		release = rpmRelease
+		arch = NOARCH
+		os = LINUX
+		from(file('root')) {
+			into('/')
+			user = 'karyon'
+			permissionGroup = 'karyon'
+		}
+		from("build/install/" + name) {
+			into('/opt/reuters/apps/karyon/'+name)
+			user = 'karyon'
+			permissionGroup = 'karyon'
+		}
+	}
+}
+
+buildRpm.dependsOn installDist
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+	test {
+		java {
+			srcDir 'src/test/java'
+		}
+		resources {
+			srcDir 'src/test/resources'
+		}
+	}
+}
+
+test {
+	// enable to see logging during gradle build
+	//testLogging.showStandardStreams = true
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+	systemProperties 'logback.configurationFile' : new File(projectDir,'src/main/resources/logback.xml').absolutePath
+	systemProperties 'property': 'value'
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	
+	<property resource="log.properties" />
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %-5p %c{1}:%L - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${LOG_FOLDER}</file>
+		<append>false</append>
+		<encoder>
+			<pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %-5p %c{1}:%L - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<root level="TRACE">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+	
+	<logger name="logSync" level="DEBUG" />
+	
+	<logger name="logSync.file" level="DEBUG" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+	
+</configuration>

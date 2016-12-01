@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+	
+	<property resource="log.properties" />
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+        	<pattern>%date %-30.30logger [%-5level] %message%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    	<file>${LOG_FOLDER}</file>
+    	<append>false</append>
+    	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+    		<pattern>%date %-30.30logger [%-5level] %message%n</pattern>
+    	</encoder>
+    </appender>
+    
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+    
+    <logger name="AuthService" level="trace" additivity="false">
+    	<appender-ref ref="STDOUT" />
+    </logger>
+    
+    <logger name="DatabaseLibrary" level="trace" additivity="false">
+    	<appender-ref ref="STDOUT" />
+    </logger>
+    
+    <logger name="DiseaseService" level="trace" additivity="false">
+    	<appender-ref ref="STDOUT" />
+    </logger>
+    
+    <logger name="FeatureLibrary" level="debug" additivity="false">
+    	<appender-ref ref="STDOUT" />
+    </logger>
+    
+    <logger name="Synchronization" level="trace" additivity="false">
+    	<appender-ref ref="STDOUT" />
+    </logger>
+    
+    <logger name="TreeService" level="trace" additivity="false">
+    	<appender-ref ref="STDOUT" />
+    </logger>
+    
+</configuration>
