@@ -30,8 +30,7 @@ Notes de recordatori:
     -Si es fa servir aquest metode, la UI nomes hauria d'accedir a l'entorn de PENDING!
 
 
--Notes:
-  Crear objectes java per entities i valors
+-Crear objectes java per entities i valors
 
   Entity -->
   "id": 7,
