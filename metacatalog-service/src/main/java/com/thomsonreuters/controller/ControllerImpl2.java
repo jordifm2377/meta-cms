@@ -153,7 +153,11 @@ public class ControllerImpl2 implements Controller2 {
 	public EntityDefClient addEntity(String userId, String entityId, String payload) {
 		try {
 			JSONObject jsonObj = new JSONObject(payload);
-			System.out.println(jsonObj);
+			EntityDefClient entityMetadata = getEntityDefinitionSummary(userId, Long.valueOf(entityId), 0);
+			//Split json object into entities using metadata.
+			System.out.println(entityMetadata.getRenderInformation()); 
+			
+			//System.out.println(jsonObj);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

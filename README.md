@@ -29,4 +29,28 @@ Notes de recordatori:
     -Com fer el tracking dels canvis ???
     -Si es fa servir aquest metode, la UI nomes hauria d'accedir a l'entorn de PENDING!
 
-  
+
+-Notes:
+  Crear objectes java per entities i valors
+
+  Entity -->
+  "id": 7,
+  "relId":null,
+  "orderType":"T",
+  "parentInstanceId":null,
+  "instanceId": null,
+  "status": "P",
+  "action": "I",
+    "attributes": [],
+    "entities": []
+
+  Valor -->
+  "id": 8,
+  "entityiId": 7,
+  "attributeEntityId": 13,
+  "mandatory":"N",
+  "valueId": null,
+  "value":"Feafjeiowhagueihrgaiuerghuirohaeuioawh"
+
+Potser caldria posar quin tipus de valor es ??? ... i crear un mapping especific per als 3 / 4 tipus de valors ??
+De moment, ho poso tot com a string, i palante.

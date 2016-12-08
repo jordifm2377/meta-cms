@@ -1,0 +1,10 @@
+.DS_Store
+.gradle
+.settings
+.project
+.classpath
+*.swp
+build
+conf
+/bin/
+*_log
