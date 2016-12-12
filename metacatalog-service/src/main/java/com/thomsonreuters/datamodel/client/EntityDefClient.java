@@ -11,6 +11,7 @@ public class EntityDefClient {
 	private String description;
 	private String tag;
 	private String renderInformation;
+	private long entityGroup;
 	private List<AttributeDefClient> attributes = new ArrayList<>();
 	private List<EntityDefClient> entities = new ArrayList<>();
 	
@@ -45,6 +46,18 @@ public class EntityDefClient {
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
+	public String getRenderInformation() {
+		return renderInformation;
+	}
+	public void setRenderInformation(String renderInformation) {
+		this.renderInformation = renderInformation;
+	}
+	public long getEntityGroup() {
+		return entityGroup;
+	}
+	public void setEntityGroup(long entityGroup) {
+		this.entityGroup = entityGroup;
+	}
 	public List<AttributeDefClient> getAttributes() {
 		return attributes;
 	}
@@ -56,12 +69,6 @@ public class EntityDefClient {
 	}
 	public void setEntities(List<EntityDefClient> entities) {
 		this.entities = entities;
-	}
-	public String getRenderInformation() {
-		return renderInformation;
-	}
-	public void setRenderInformation(String renderInformation) {
-		this.renderInformation = renderInformation;
 	}
 
 }

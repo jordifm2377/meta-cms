@@ -15,6 +15,7 @@ import com.thomsonreuters.datamodel.EntityDef;
 import com.thomsonreuters.datamodel.LookupDef;
 import com.thomsonreuters.datamodel.LookupDef.LookupValueDef;
 import com.thomsonreuters.datamodel.RelationDef;
+import com.thomsonreuters.datamodel.client.ApiEntityClient;
 import com.thomsonreuters.datamodel.client.AttributeDefClient;
 import com.thomsonreuters.datamodel.client.EntityDefClient;
 import com.thomsonreuters.datamodel.client.LookupDefClient;
@@ -29,6 +30,7 @@ import com.thomsonreuters.model.LookupModelImpl;
 import com.thomsonreuters.model.RelationModel;
 import com.thomsonreuters.model.RelationModelImpl;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -68,6 +70,7 @@ public class ControllerImpl2 implements Controller2 {
 			entDefCli.setCaption(entDef.getCaption());
 			entDefCli.setDescription(entDef.getDescription());
 			entDefCli.setTag(entDef.getTag());
+			entDefCli.setEntityGroup(entDef.getGroupId());
 			if(entDef.getGroupId() > 1 || deep == 0) {
 				List<EntityAttributeDef> eaDefList = entityAttrModel.getEntityAttributeDefListForEntity(userId, entityId, dbExec);
 				if(eaDefList.size() > 0) {
@@ -152,16 +155,42 @@ public class ControllerImpl2 implements Controller2 {
 	@Override
 	public EntityDefClient addEntity(String userId, String entityId, String payload) {
 		try {
-			JSONObject jsonObj = new JSONObject(payload);
+			ApiEntityClient aec = mapper.readValue(payload, ApiEntityClient.class);
+			//JSONObject jsonObj = new JSONObject(payload);
 			EntityDefClient entityMetadata = getEntityDefinitionSummary(userId, Long.valueOf(entityId), 0);
-			//Split json object into entities using metadata.
-			System.out.println(entityMetadata.getRenderInformation()); 
-			
-			//System.out.println(jsonObj);
-		} catch (JSONException e) {
+			//Check entity type... can only be 1 or 2 !!
+			if(entityMetadata.getEntityGroup() >= 3) {
+				return null; //this should not be possible... return error !!!
+			}
+			else {
+				if(aec.getEntities().size() <= 0) { //just updating attributes or status
+					
+				} else {
+					ApiEntityClient aec2 = aec.getEntities().get(0); //It shouldn't be a list... as for now always add a single sub-entity
+					EntityDefClient entityMetadata2 = getEntityDefinitionSummary(userId, Long.valueOf(aec2.getEntityId()), 0);
+					if(entityMetadata.getEntityGroup() == 3) { //It's M-N relation, it should have a child of groupId 1 or 2
+						EntityDefClient entityMetadata3 = getEntityDefinitionSummary(userId, Long.valueOf(entityId), 0);
+					}
+					else if(entityMetadata.getEntityGroup() == 1) { //It's 1-1 or 1-N with entity 1
+						
+					}
+					else if(entityMetadata.getEntityGroup() == 2) { //It's 1-1 or 1-N with entity 2
+						
+					}
+					
+				}
+				
+			}
+			//entityMetadata.ge
+			//
+			System.out.println(entityMetadata.getRenderInformation());
+			System.out.println(aec.getAction());
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+			
+			//System.out.println(jsonObj);
 		return null;
 	}
 
