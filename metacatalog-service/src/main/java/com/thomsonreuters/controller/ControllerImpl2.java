@@ -156,41 +156,43 @@ public class ControllerImpl2 implements Controller2 {
 	public EntityDefClient addEntity(String userId, String entityId, String payload) {
 		try {
 			ApiEntityClient aec = mapper.readValue(payload, ApiEntityClient.class);
-			//JSONObject jsonObj = new JSONObject(payload);
 			EntityDefClient entityMetadata = getEntityDefinitionSummary(userId, Long.valueOf(entityId), 0);
 			//Check entity type... can only be 1 or 2 !!
 			if(entityMetadata.getEntityGroup() >= 3) {
-				return null; //this should not be possible... return error !!!
+				return null; //this should not be possible, main entity MUST be of type 1 or 2... return error !!!
 			}
 			else {
-				if(aec.getEntities().size() <= 0) { //just updating attributes or status
-					
-				} else {
+				if(aec.getEntities().size() > 0) {
 					ApiEntityClient aec2 = aec.getEntities().get(0); //It shouldn't be a list... as for now always add a single sub-entity
 					EntityDefClient entityMetadata2 = getEntityDefinitionSummary(userId, Long.valueOf(aec2.getEntityId()), 0);
-					if(entityMetadata.getEntityGroup() == 3) { //It's M-N relation, it should have a child of groupId 1 or 2
-						EntityDefClient entityMetadata3 = getEntityDefinitionSummary(userId, Long.valueOf(entityId), 0);
+					if(entityMetadata2.getEntityGroup() == 3) { //It's M-N relation, it should have a child of groupId 1 or 2
+						if(aec2.getEntities().size() > 0) {
+							ApiEntityClient aec3 = aec2.getEntities().get(0); //It shouldn't be a list... as for now always add a single sub-entity
+							EntityDefClient entityMetadata3 = getEntityDefinitionSummary(userId, Long.valueOf(aec3.getEntityId()), 0);
+							if(entityMetadata3.getEntityGroup() == 1) {
+								
+							}
+							else if(entityMetadata3.getEntityGroup() == 2) {
+								
+							}
+						} 
+						else { //It's an error... an entity of group type 3 MUST have an entity of type 1 or 2 attached!
+							return null;
+						}
 					}
-					else if(entityMetadata.getEntityGroup() == 1) { //It's 1-1 or 1-N with entity 1
+					else if(entityMetadata2.getEntityGroup() == 1) { //It's 1-1 or 1-N with entity 1
 						
 					}
-					else if(entityMetadata.getEntityGroup() == 2) { //It's 1-1 or 1-N with entity 2
+					else if(entityMetadata2.getEntityGroup() == 2) { //It's 1-1 or 1-N with entity 2
 						
-					}
-					
+					}					
+				} 
+				else { //just insert one entity
 				}
-				
 			}
-			//entityMetadata.ge
-			//
-			System.out.println(entityMetadata.getRenderInformation());
-			System.out.println(aec.getAction());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
-			//System.out.println(jsonObj);
 		return null;
 	}
 
